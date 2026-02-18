@@ -7,6 +7,13 @@
     "pmneo.tsimporter",
     "aaron-bond.better-comments",
     "bradlc.vscode-tailwindcss",
-    "naumovs.color-highlight"
+    "naumovs.color-highlight",
+    "usernamehw.errorlens",
+    "wix.vscode-import-cost",
+    "eamodio.gitlens",
+    "mikestead.dotenv",
+    "orta.vscode-jest",
+    "csstools.postcss",
+    "ms-azuretools.vscode-docker"
   ]
 }
