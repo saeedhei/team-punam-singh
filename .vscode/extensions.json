@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+    "infeng.vscode-react-typescript",
+    "pmneo.tsimporter",
+    "aaron-bond.better-comments",
+    "bradlc.vscode-tailwindcss",
+    "naumovs.color-highlight"
+  ]
+}
