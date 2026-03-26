@@ -1,5 +1,6 @@
-import { ticketDb, Ticket } from '@/lib/couchdb';
 import { NextResponse } from 'next/server';
+import { ticketDb } from '@/lib/couchdb'; // Keep the database connection here
+import type { Ticket } from '@/types/ticket'; // Get the "Shape" from the new types folderimport { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
@@ -12,7 +13,7 @@ export async function POST(req: Request) {
       description: data.description,
       status: 'open',
       priority: data.priority || 'medium',
-      created_at: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
     };
 
     const response = await ticketDb.insert(newTicket);
