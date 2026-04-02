@@ -22,7 +22,7 @@ export const TicketService = {
       ...ticketData,
       type: 'ticket',
       status: ticketData.status || 'open',
-      createdAt: new Date().toISOString(),
+     created_at: new Date().toISOString(),
     };
     return await db.insert(newTicket);
   },

@@ -1,25 +1,28 @@
 import { NextResponse } from 'next/server';
-import { ticketDb } from '@/lib/couchdb'; // Keep the database connection here
-import type { Ticket } from '@/types/ticket'; // Get the "Shape" from the new types folderimport { NextResponse } from 'next/server';
+import { ticketDb } from '@/lib/couchdb'; 
+import type { Ticket } from '@/types/ticket';
 
 export async function POST(req: Request) {
   try {
     const data = await req.json();
     
-    // Explicitly typing the object ensures data matches the interface
+    // 1. Validation Check (Professional touch)
+    if (!data.subject || !data.description) {
+      return NextResponse.json({ error: "Subject and Description are required" }, { status: 400 });
+    }
+
     const newTicket: Ticket = {
       type: 'ticket',
       subject: data.subject,
       description: data.description,
       status: 'open',
       priority: data.priority || 'medium',
-      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
     };
 
     const response = await ticketDb.insert(newTicket);
-    return NextResponse.json({ success: true, id: response.id });
+    return NextResponse.json({ success: true, id: response.id }, { status: 201 });
   } catch (error) {
-    // Narrowing the type from unknown to Error
     const message = error instanceof Error ? error.message : 'Failed to create ticket';
     return NextResponse.json({ error: message }, { status: 500 });
   }
@@ -27,12 +30,13 @@ export async function POST(req: Request) {
 
 export async function GET() {
   try {
+    // 2. Fetching only ticket types
     const result = await ticketDb.find({
       selector: { type: 'ticket' }
     });
     return NextResponse.json(result.docs);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
+    console.error("GET Error:", error); // Terminal mein error dekhne ke liye
     return NextResponse.json({ error: 'Fetch failed' }, { status: 500 });
   }
 }

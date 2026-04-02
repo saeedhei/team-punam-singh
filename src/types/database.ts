@@ -5,7 +5,7 @@ export interface UserProfile {
   name: string;
   email: string;
   role: 'admin' | 'user';
-  createdAt: string;
+  created_at: string;
 }
 
 // This line is the most important for scalability

@@ -2,10 +2,10 @@ import type { MaybeDocument } from 'nano';
 
 export interface Ticket extends MaybeDocument {
   type: 'ticket';
-  subject: string;
+  subject?: string;     // '?' matlab optional
+  title?: string;       
   description: string;
   status: 'open' | 'in-progress' | 'closed';
   priority: 'low' | 'medium' | 'high';
-  createdAt: string;
+  created_at: string;
 }
-
